@@ -1,0 +1,28 @@
+{
+    "name": "lambda-sqs-bug",
+    "version": "1.0.0",
+    "description": "",
+    "main": "handler.js",
+    "scripts": {
+        "cdk": "cdk",
+        "lint": "npx eslint .",
+        "synth": "rm -rf cdk.out && npx cdk synth"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vector-remote-care/smartsheet-sync-worker.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/vector-remote-care/smartsheet-sync-worker/issues"
+    },
+    "homepage": "https://github.com/vector-remote-care/smartsheet-sync-worker#readme",
+    "dependencies": {
+        "@vector-remote-care/mysql-orm": "^4.3.0"
+    },
+    "devDependencies": {
+        "esbuild": "^0.12.2",
+        "@vector-remote-care/cdk-utils": "^3.2.33"
+    }
+}
