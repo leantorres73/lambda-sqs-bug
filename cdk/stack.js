@@ -3,9 +3,7 @@ const sqs = require('aws-cdk-lib/aws-sqs');
 const lambda = require('aws-cdk-lib/aws-lambda');
 
 const nodeLambda = require('aws-cdk-lib/aws-lambda-nodejs');
-const destinations = require('aws-cdk-lib/aws-lambda-destinations');
 const eventsource = require('aws-cdk-lib/aws-lambda-event-sources');
-const cdkUtils = require('@vector-remote-care/cdk-utils');
 
 class DeploymentStack extends core.Stack {
     /**
@@ -31,7 +29,6 @@ class DeploymentStack extends core.Stack {
                 maxReceiveCount: 5
             }
         });
-        const environments = cdkUtils.secrets.getDBEnvironments(this, props.isProd);
         const senderLambda = new nodeLambda.NodejsFunction(
             this,
             'senderLambda',
@@ -41,18 +38,7 @@ class DeploymentStack extends core.Stack {
                 handler: 'send',
                 timeout: core.Duration.seconds(300),
                 environment: {
-                    ...environments,
                     QUEUE_URL: queue.queueUrl
-                },
-                bundling: {
-                    nodeModules: [
-                        '@vector-remote-care/mysql-orm',
-                    ],
-                    externalModules: [
-                        'aws-sdk',
-                        'pg-hstore',
-                        '@vector-remote-care/mysql-orm'
-                    ]
                 }
             }
         );
@@ -63,21 +49,10 @@ class DeploymentStack extends core.Stack {
                 runtime: lambda.Runtime.NODEJS_14_X,
                 entry: 'handler.js',
                 handler: 'main',
-                vpc: cdkUtils.vpc.getVPC(this),
                 reservedConcurrentExecutions: 1,
                 environment: {
                     ...environments,
                     QUEUE_URL: queue.queueUrl
-                },
-                bundling: {
-                    nodeModules: [
-                        '@vector-remote-care/mysql-orm',
-                    ],
-                    externalModules: [
-                        'aws-sdk',
-                        'pg-hstore',
-                        '@vector-remote-care/mysql-orm'
-                    ]
                 },
                 timeout: core.Duration.seconds(300)
             }
