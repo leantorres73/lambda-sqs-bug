@@ -3,8 +3,6 @@
   "context": {
     "aws-cdk:enableDiffNoFail": "true",
     "@aws-cdk/core:stackRelativeExports": "true",
-    "@aws-cdk/core:newStyleStackSynthesis": true,
-    "REPOSITORY_NAME": "smartsheet-sync-worker",
-    "BRANCH_NAME": "synth"
+    "@aws-cdk/core:newStyleStackSynthesis": true
   }
 }
