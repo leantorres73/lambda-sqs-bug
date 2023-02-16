@@ -10,7 +10,9 @@
     },
     "author": "",
     "license": "ISC",
-    "dependencies": {},
+    "dependencies": {
+        "constructs": "^10.1.252"
+    },
     "devDependencies": {
         "aws-cdk-lib": "^2.65.0",
         "esbuild": "^0.12.2"

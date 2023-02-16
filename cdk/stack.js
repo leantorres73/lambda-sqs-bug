@@ -51,7 +51,6 @@ class DeploymentStack extends core.Stack {
                 handler: 'main',
                 reservedConcurrentExecutions: 1,
                 environment: {
-                    ...environments,
                     QUEUE_URL: queue.queueUrl
                 },
                 timeout: core.Duration.seconds(300)
